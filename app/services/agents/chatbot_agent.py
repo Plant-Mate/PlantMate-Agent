@@ -1,6 +1,6 @@
 # from pydantic_ai import Agent
-# from src.models.plant_status import PlantStatus
-# from src.models.care_suggestion import CareSuggestion
+# from app.models.plant_status import PlantStatus
+# from app.models.care_suggestion import CareSuggestion
 # from dotenv import load_dotenv
 #
 # load_dotenv()

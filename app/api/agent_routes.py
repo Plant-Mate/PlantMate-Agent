@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from src.models.chat_request import ChatRequest
-# from src.services.agents.chatbot_agent import chatbot_agent
+from app.models.chat_request import ChatRequest
+# from app.services.agents.chatbot_agent import chatbot_agent
 
 router = APIRouter()
 

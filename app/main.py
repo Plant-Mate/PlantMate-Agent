@@ -4,7 +4,7 @@ import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from src.controllers.AgentController import router
+from app.api.agent_routes import router
 
 app = FastAPI()
 client_url = os.getenv("DEV_CLIENT_URL", "*")

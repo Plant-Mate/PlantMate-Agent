@@ -1,6 +1,6 @@
 # from apscheduler.schedulers.background import BackgroundScheduler
-# from src.agents.care_suggestion_agent import care_agent
-# from src.models.plant_status import PlantStatus
+# from app.agents.care_suggestion_agent import care_agent
+# from app.models.plant_status import PlantStatus
 # import atexit
 #
 # scheduler = BackgroundScheduler()
