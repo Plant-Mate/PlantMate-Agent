@@ -2,9 +2,9 @@ import os
 
 import uvicorn
 from fastapi import FastAPI
-from starlette.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.agent_routes import router
+from app.api import plant_router, chat_message_router, agent_router
 
 app = FastAPI()
 client_url = os.getenv("DEV_CLIENT_URL", "*")
@@ -14,14 +14,16 @@ origins = [
 ]
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware, # type: ignore
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-app.include_router(router)
+# app.include_router(agent_router)
+app.include_router(plant_router.router)
+app.include_router(chat_message_router.router)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
