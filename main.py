@@ -1,11 +1,27 @@
+import os
+
+import uvicorn
 from fastapi import FastAPI
-from scheduler import start_scheduler
-from api.chatbot import router as chatbot_router
+from starlette.middleware.cors import CORSMiddleware
+
+from src.controllers.AgentController import router
 
 app = FastAPI()
+client_url = os.getenv("DEV_CLIENT_URL", "*")
 
-@app.on_event("startup")
-def startup_event():
-    start_scheduler()
+origins = [
+    client_url,
+]
 
-app.include_router(chatbot_router, prefix="/api")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(router)
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)
