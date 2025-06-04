@@ -1,9 +1,11 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
 from typing import Optional
+from bson import ObjectId
+from app.models.mongo import PyObjectId
 
 class Plant(BaseModel):
-    id: Optional[str] = Field(default=None, alias="_id")
+    id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
     name: str
     species: str
     description: str
@@ -15,5 +17,6 @@ class Plant(BaseModel):
         populate_by_name = True
         arbitrary_types_allowed = True
         json_encoders = {
+            ObjectId: str,
             datetime: lambda dt: dt.isoformat(),
         }

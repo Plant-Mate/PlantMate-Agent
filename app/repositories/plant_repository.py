@@ -13,7 +13,7 @@ class PlantRepository:
         plant_dict["created_at"] = datetime.now(timezone.utc)
         plant_dict["updated_at"] = datetime.now(timezone.utc)
         result = await self.collection.insert_one(plant_dict)
-        plant_dict["_id"] = str(result.inserted_id)
+        plant_dict["_id"] = result.inserted_id
         return Plant(**plant_dict)
 
     async def find_by_id(self, plant_id: ObjectId) -> Optional[Plant]:

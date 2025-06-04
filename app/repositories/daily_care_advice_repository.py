@@ -10,10 +10,10 @@ class DailyCareAdviceRepository:
         self.collection = db["daily_care_advices"]
 
     async def create(self, advice: DailyCareAdvice) -> DailyCareAdvice:
-        advice_dict = advice.model_dump(by_alias=True)
+        advice_dict = advice.model_dump(by_alias=True, exclude_unset=True)
         advice_dict["generated_date"] = datetime.now(timezone.utc)
         result = await self.collection.insert_one(advice_dict)
-        advice_dict["_id"] = str(result.inserted_id)
+        advice_dict["_id"] = result.inserted_id
         return DailyCareAdvice(**advice_dict)
 
     async def find_by_id(self, advice_id: ObjectId) -> Optional[DailyCareAdvice]:

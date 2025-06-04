@@ -9,10 +9,11 @@ class ChatMessageRepository:
         self.collection = db["chat_messages"]
 
     async def create(self, message: ChatMessage) -> ChatMessage:
-        message_dict = message.model_dump(by_alias=True)
+        message_dict = message.model_dump(by_alias=True, exclude_unset=True)
         message_dict["timestamp"] = datetime.now(timezone.utc)
+        message_dict["plant_id"] = ObjectId(message.plant_id)
         result = await self.collection.insert_one(message_dict)
-        message_dict["_id"] = str(result.inserted_id)
+        message_dict["_id"] = result.inserted_id
         return ChatMessage(**message_dict)
 
     async def find_by_id(self, message_id: ObjectId) -> Optional[ChatMessage]:
