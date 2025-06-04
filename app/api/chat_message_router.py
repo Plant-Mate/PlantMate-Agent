@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from typing import List
 from app.models.chat_message import ChatMessage
 from app.services.chat_message_service import ChatMessageService
-from app.services.agents.chatbot_agent import ChatbotAgent
+# from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
 
 router = APIRouter(prefix="/chat-messages", tags=["chat_messages"])
