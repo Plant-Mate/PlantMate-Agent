@@ -10,7 +10,7 @@ class ChatMessageRequest(BaseModel):
         populate_by_name = True
         arbitrary_types_allowed = True
 
-    def to_chat_message(self, plant_id: str) -> "ChatMessage":
+    def to_chat_message(self, plant_id: str) -> ChatMessage:
         return ChatMessage(
             plant_id=plant_id,
             message_type=self.message_type,
