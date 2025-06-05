@@ -1,8 +1,8 @@
 from app.db.mongodb import db
-from repositories.plant_repository import PlantRepository
-from repositories.chat_message_repository import ChatMessageRepository
-from services.plant_service import PlantService
-from services.chat_message_service import ChatMessageService
+from app.repositories.plant_repository import PlantRepository
+from app.repositories.chat_message_repository import ChatMessageRepository
+from app.services.plant_service import PlantService
+from app.services.chat_message_service import ChatMessageService
 
 
 def get_plant_service():
