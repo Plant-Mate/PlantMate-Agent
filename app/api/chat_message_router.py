@@ -5,7 +5,7 @@ from app.services.chat_message_service import ChatMessageService
 # from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
 
-router = APIRouter(prefix="/chat-messages", tags=["chat_messages"])
+router = APIRouter(prefix="/api/chat-messages", tags=["chat_messages"])
 
 
 # @router.post("/chat")
