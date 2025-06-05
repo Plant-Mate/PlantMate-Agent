@@ -16,7 +16,7 @@ class DailyCareAdvice(BaseModel):
     id: Optional[str] = Field(default=None, alias="_id")
     plant_id: str
     advice: Advice
-    generated_date: datetime
+    generated_date: datetime = Field(default_factory=datetime.now)
     sensor_data_summary: SensorDataSummary
 
     class Config:
@@ -25,3 +25,7 @@ class DailyCareAdvice(BaseModel):
         json_encoders = {
             datetime: lambda dt: dt.isoformat(),
         }
+
+class FakeDailyAdvice(BaseModel):
+    advice: str
+    generated_date: datetime = Field(default_factory=datetime.now)

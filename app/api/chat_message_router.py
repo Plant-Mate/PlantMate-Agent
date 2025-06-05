@@ -5,20 +5,43 @@ from app.models.chat_message_request import ChatMessageRequest
 from app.services.chat_message_service import ChatMessageService
 # from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
+from bson import ObjectId
 
 router = APIRouter(prefix="/api/chat-messages", tags=["chat_messages"])
 
 
 # @router.post("/chat")
-# def chat_with_plant(request: ChatRequest, agent: ChatbotAgent):
-#     result = agent.run_sync(f"{request.plant_name}：{request.user_message}")
-#     return {"reply": result.output}
-
+# async def chat_with_plant(msg: ChatMessage,service: ChatMessageService = Depends(get_chat_message_service)):
+#    user_id = str(ObjectId())
+#    user_msg = ChatMessage(
+#        id=user_id,
+#        plant_id=msg.plant_id,
+#        message_type="user",
+#        content=msg.content
+#    )
+#    saved_user_msg = await service.create_message(user_msg)
+#    result = await ChatbotAgent.run(saved_user_msg)
+#    bot_content = ""
+#    if hasattr(result.output, "content"):
+#        bot_content = result.output.content
+#    else:
+#        bot_content = str(result.output)
+#    bot_id = str(ObjectId())
+#    bot_msg = ChatMessage(
+#        id=bot_id,
+#        plant_id=result.plant_id,
+#        message_type="assistant",
+#        content=bot_content
+#    )
+#    saved_bot_msg = await service.create_message(bot_msg)
+#    return saved_bot_msg 
+    
 
 @router.post("/{plant_id}", response_model=ChatMessage)
 async def create_message(plant_id: str, msg: ChatMessageRequest, service: ChatMessageService = Depends(get_chat_message_service)):
     message = msg.to_chat_message(plant_id)
-    return await service.create_message(message)
+    # return await service.create_message(message)
+    return await service.create_mock_message(message)
 
 
 @router.get("/{message_id}", response_model=ChatMessage)
