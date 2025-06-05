@@ -29,7 +29,7 @@ app.include_router(plant_router.router)
 app.include_router(chat_message_router.router)
 app.include_router(demo_router.router)
 
-scheduler.add_job(generate_daily_care, 'cron', hour=22, minute=13)
+scheduler.add_job(generate_daily_care, 'cron', hour=23, minute=44)
 
 @app.on_event("startup")
 def start_scheduler_event():

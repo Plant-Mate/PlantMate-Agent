@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException, APIRouter
 from typing import List
-from app.models.demo import QueryRequest, QueryResponse
+from app.models.demo import QueryRequest, QueryResponse, daily_advice
 from app.services.chat_message_service import ChatMessageService
 from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
@@ -20,3 +20,8 @@ async def query_endpoint(req: QueryRequest):
         return QueryResponse(answer=mapping[req.key])
     else:
         raise HTTPException(status_code=404, detail="No matching answer for given key")
+
+@router.get("/advice",response_model=daily_advice)
+async def get_daily_advice():
+    advice = daily_advice
+    return advice

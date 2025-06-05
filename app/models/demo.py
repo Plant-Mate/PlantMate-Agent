@@ -7,3 +7,6 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
 
+class daily_advice(BaseModel):
+    timestamp: str   
+    sentence: str 

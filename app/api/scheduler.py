@@ -3,8 +3,9 @@ from apscheduler.schedulers.background import BackgroundScheduler
 # from app.models.plant_status import PlantStatus
 import atexit
 import random
-
-
+from datetime import datetime
+from typing import Dict
+from app.models.demo import daily_advice
 def generate_daily_care():
     sentence = [
 """
@@ -30,4 +31,7 @@ def generate_daily_care():
 目前土壤濕度不高，也不宜施肥。若下週需要施肥，等氣溫回升到 24–28°C、土壤濕度約 40–50% 時，再以 1/3 濃度液肥補充養分即可。"""
 ]
     ran = random.choice(sentence)
+    now_time = datetime.now().isoformat()
     print(f"今日照顧建議:{ran}")
+    daily_advice.timestamp = now_time
+    daily_advice.sentence = ran
