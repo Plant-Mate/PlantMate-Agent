@@ -14,8 +14,9 @@ router = APIRouter(prefix="/api/chat-messages", tags=["chat_messages"])
 #     return {"reply": result.output}
 
 
-@router.post("/", response_model=ChatMessage)
-async def create_message(msg: ChatMessage, service: ChatMessageService = Depends(get_chat_message_service)):
+@router.post("/{plant_id}", response_model=ChatMessage)
+async def create_message(plant_id: str, msg: ChatMessage, service: ChatMessageService = Depends(get_chat_message_service)):
+    msg.to_chat_message(plant_id)
     return await service.create_message(msg)
 
 

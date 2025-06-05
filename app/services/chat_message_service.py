@@ -1,5 +1,4 @@
 from typing import List, Optional
-from bson import ObjectId
 from app.models.chat_message import ChatMessage
 from app.repositories.chat_message_repository import ChatMessageRepository
 
