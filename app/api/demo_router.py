@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, APIRouter
 from typing import List
 from app.models.demo import QueryRequest, QueryResponse, daily_advice
 from app.services.chat_message_service import ChatMessageService
-from app.services.agents.chatbot_agent import ChatbotAgent
+# from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
 from bson import ObjectId
 router = APIRouter(prefix="/query", tags=["demos"])

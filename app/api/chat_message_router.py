@@ -3,7 +3,7 @@ from typing import List
 from app.models.chat_message import ChatMessage
 from app.models.chat_message_request import ChatMessageRequest
 from app.services.chat_message_service import ChatMessageService
-from app.services.agents.chatbot_agent import ChatbotAgent
+# from app.services.agents.chatbot_agent import ChatbotAgent
 from app.dependencies import get_chat_message_service
 from bson import ObjectId
 
@@ -40,7 +40,8 @@ router = APIRouter(prefix="/api/chat-messages", tags=["chat_messages"])
 @router.post("/{plant_id}", response_model=ChatMessage)
 async def create_message(plant_id: str, msg: ChatMessageRequest, service: ChatMessageService = Depends(get_chat_message_service)):
     message = msg.to_chat_message(plant_id)
-    return await service.create_message(message)
+    # return await service.create_message(message)
+    return await service.create_mock_message(message)
 
 
 @router.get("/{message_id}", response_model=ChatMessage)
