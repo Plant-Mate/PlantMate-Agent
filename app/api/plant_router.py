@@ -4,7 +4,7 @@ from app.models.plant import Plant
 from app.services.plant_service import PlantService
 from app.dependencies import get_plant_service
 
-router = APIRouter(prefix="/plants", tags=["plants"])
+router = APIRouter(prefix="/api/plants", tags=["plants"])
 
 
 @router.post("/", response_model=Plant)

@@ -7,7 +7,7 @@ class Plant(BaseModel):
     name: str
     species: str
     description: str
-    sensor_id: str
+    sensor_id: str = Field(default=None)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
