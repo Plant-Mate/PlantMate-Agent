@@ -10,7 +10,6 @@ ChatbotAgent = Agent(
     "openai:gpt-4.1-nano",
      input_type=ChatMessage,
      output_type=ChatMessage,
-     deps_type=None,
      retries=2,
      system_prompt="""
      You are the personified character of a plant. Based on the user's questions,
@@ -20,8 +19,17 @@ ChatbotAgent = Agent(
  )
 
 @ChatbotAgent.system_prompt
-def format_user_context(ctx: RunContext[ChatMessage]) -> str:
-    user_msg: ChatMessage = ctx.input
+def format_user_context(doc_ctx: RunContext[ChatMessage]) -> str:
+    user_msg: ChatMessage = doc_ctx.deps.content
+    """
+    System prompt: Defines the AI’s role, behavior, and tasks for the Agent.
+
+    Args:
+        None
+
+    Returns:
+        str: The system prompt text sent to the LLM, specifying the AI’s identity, tone, and execution logic.
+    """
     return (
         f"Plant ID: {user_msg.plant_id}\n"
         f"User Message: {user_msg.content}\n"
