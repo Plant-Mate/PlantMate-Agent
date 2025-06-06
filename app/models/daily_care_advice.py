@@ -2,20 +2,20 @@ from pydantic import BaseModel, Field
 from typing import Optional
 from datetime import datetime
 
-class Advice(BaseModel):
-    message: str
-    need_watering: bool
+class CareAdvice(BaseModel):
+    plant_status: str
+    watering_and_care_advice: str
     note: str
 
 class SensorDataSummary(BaseModel):
-    avg_temperature: float
-    avg_humidity: float
-    avg_soil_moisture: float
+    temperature: float
+    humidity: float
+    soil_moisture: float
 
 class DailyCareAdvice(BaseModel):
     id: Optional[str] = Field(default=None, alias="_id")
     plant_id: str
-    advice: Advice
+    advice: CareAdvice
     generated_date: datetime = Field(default_factory=datetime.now)
     sensor_data_summary: SensorDataSummary
 
